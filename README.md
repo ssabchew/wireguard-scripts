@@ -5,7 +5,7 @@ Do not use this scripts on production system
 
 Usage:
 ```
-$ cd kyes
+$ cd keys
 $ ./go.sh #will create default key and defaulr.pub keys
 
 To generate keypair server.key and server.pub
