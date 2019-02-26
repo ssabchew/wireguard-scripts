@@ -95,7 +95,7 @@ it will create a file `last_ip`, which will contain last used client IP.
 
 # === Handle firewalld
 ```
-$ export UDP_PORT='' # your UDP PORT, or replace it in next command
+$ export UDP_PORT='5128' # your UDP PORT, or replace it in next command
 
 $ [ -f  /etc/firewalld/services/wireguard.xml ] || echo No such file
 $ tee /etc/firewalld/services/wireguard.xml
