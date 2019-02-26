@@ -21,7 +21,7 @@ PrivateKey - you can generate a keypair with './keys/go.sh server' and add the c
 2. Configure 0client_template.conf
 ```
 PublicKey - put the content of server.pub here 
-Endpoint - put here your server's <Public IP>, in this example I will use 1.1.1.1
+Endpoint - put here your server's <Public IP>:PORT, in this example I will use 1.1.1.1:5128
 ```
 
 3. Configure the script keys/client_genkeyconfig.sh 
