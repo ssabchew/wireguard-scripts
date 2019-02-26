@@ -37,7 +37,7 @@ wg_srvip="1.1.1.1.:5128" # your public IP
 Then what we can do is to run the script, that generates client key pairs, client configuratoins and update the wg0-server.conf
 Example:
 ```
-$ cd kyes
+$ cd keys
 $ ./client_genkeyconfig.sh user1
 + musr=user1
 + umask 077
