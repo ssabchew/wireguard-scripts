@@ -62,7 +62,7 @@ Also it updates the ../wg0-server.conf, and adds these lines:
 [Peer] # user1
 PublicKey = gO1N47+GuePT+4cYJuqqgaiPYbD9GDY0hlfEcTVOojc=
 PresharedKey = rG3tkEptz9zQaX2F3JK6qYG1TvGI+NtJIUKsQuxzApQ=
-AllowedIPs = 10.0.0.0/24
+AllowedIPs = 10.0.0.64/24
 Endpoint = 1.1.1.1:5128
 ```
 You can yse the client configuration user1.conf
@@ -88,4 +88,26 @@ You can yse the client configuration user1.conf
 If you wan you can isntal qrencode, and convert configs to QR code in console ( for RHEL/CentOS, there are no X packages dependecies)
 ```
 $ qrencode -lL -t ANSIutf8 < user1.conf
+```
+
+The script will start assign IPs from ${mnet}.64/24 - in this example 10.0.0.64/24.
+it will create a file `last_ip`, which will contain last used client IP.
+
+# === Handle firewalld
+```
+$ export UDP_PORT='' # your UDP PORT, or replace it in next command
+
+$ [ -f  /etc/firewalld/services/wireguard.xml ] || echo No such file
+$ tee /etc/firewalld/services/wireguard.xml
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>wireguard</short>
+  <description>WireGuard (wg) custom installation</description>
+  <port protocol="udp" port="$UDP_PORT"/>
+</service>
+
+$ firewall-cmd --add-service=wireguard --zone=public --permanent
+$ firewall-cmd --zone=public --add-masquerade --permanent
+$ firewall-cmd --reload
+$ firewall-cmd --list-all
 ```
