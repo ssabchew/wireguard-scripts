@@ -26,9 +26,9 @@ Endpoint - put here your server's <Public IP>, in this example I will use 1.1.1.
 
 3. Configure the script keys/client_genkeyconfig.sh 
 ```
-mnet="10.0.0" # this should be your prefix of your private network - we will use /24
+mnet="10.0.0" # this should be your prefix of your private network - we will use /24 netmask.
 
-srv_conf="../wg0-server.conf" # how your server config is called - we will add ther client configs
+srv_conf="../wg0-server.conf" # how your server config is called - we will add ther client configs.
 
 wg_srvip="1.1.1.1.:5128" # your public IP
 
