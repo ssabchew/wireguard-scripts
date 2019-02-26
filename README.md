@@ -97,14 +97,16 @@ it will create a file `last_ip`, which will contain last used client IP.
 ```
 $ export UDP_PORT='5128' # your UDP PORT, or replace it in next command
 
-$ [ -f  /etc/firewalld/services/wireguard.xml ] || echo No such file
-$ tee /etc/firewalld/services/wireguard.xml
+$ [ -f  /etc/firewalld/services/wireguard.xml ] || echo No such file 
+# Create this file
+$ cat >  /etc/firewalld/services/wireguard.xml <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <service>
   <short>wireguard</short>
   <description>WireGuard (wg) custom installation</description>
   <port protocol="udp" port="$UDP_PORT"/>
 </service>
+EOF
 
 $ firewall-cmd --add-service=wireguard --zone=public --permanent
 $ firewall-cmd --zone=public --add-masquerade --permanent
