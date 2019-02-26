@@ -117,8 +117,6 @@ cat >> "${srv_conf}" <<EOF
 PublicKey = ${client_pub}
 ${pre_line}
 AllowedIPs = ${c_net}
-Endpoint = ${wg_srvip}
-
 EOF
 fi
 
