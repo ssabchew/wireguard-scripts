@@ -93,7 +93,7 @@ $ qrencode -lL -t ANSIutf8 < user1.conf
 The script will start assign IPs from ${mnet}.64/24 - in this example 10.0.0.64/24.
 it will create a file `last_ip`, which will contain last used client IP.
 
-# === Handle firewalld
+## Handle firewalld
 ```
 $ export UDP_PORT='5128' # your UDP PORT, or replace it in next command
 
