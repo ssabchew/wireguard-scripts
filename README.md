@@ -9,11 +9,11 @@ $ cd keys
 $ ./go.sh #will create default key and defaulr.pub keys
 
 To generate keypair server.key and server.pub
-$ ./go.sh server 
+$ ./go.sh server
 ```
-1.Configure your wg0-server.conf - fill-ing
+1.Configure your wg0-server.conf
 ```
-Address - your <External IP
+Address - your <External IP>
 ListenPort - your desired UDP port that server will listen to - default is 51820.
 PrivateKey - you can generate a keypair with './keys/go.sh server' and add the content of  server..key file here.
 ```
@@ -30,7 +30,7 @@ mnet="10.0.0" # this should be your prefix of your private network - we will use
 
 srv_conf="../wg0-server.conf" # how your server config is called - we will add ther client configs.
 
-wg_srvip="1.1.1.1.:5128" # your public IP
+wg_srvip="1.1.1.1.:5128" # your public IP and PORT
 
 ```
 
@@ -45,9 +45,14 @@ $ ./client_genkeyconfig.sh user1
 + wg pubkey
 + echo OK
 OK
-Client config is user1.conf. You visualize it with:
+Client config is user1.conf. You can visualize it with:
+```
 qrencode -lL -t ANSIutf8 < user1.conf
-Or... qrencode -lL -t PNG < user1.conf -o user1.png
+```
+Or create a png:
+```
+qrencode -lL -t PNG < user1.conf -o user1.png
+```
 It shuold be added to server confing in: ../wg0-server.conf
 ```
 The script creates:
@@ -62,7 +67,7 @@ Also it updates the ../wg0-server.conf, and adds these lines:
 [Peer] # user1
 PublicKey = gO1N47+GuePT+4cYJuqqgaiPYbD9GDY0hlfEcTVOojc=
 PresharedKey = rG3tkEptz9zQaX2F3JK6qYG1TvGI+NtJIUKsQuxzApQ=
-AllowedIPs = 10.0.0.64/24
+AllowedIPs = 10.0.0.64
 Endpoint = 1.1.1.1:5128
 ```
 You can yse the client configuration user1.conf
@@ -91,7 +96,7 @@ $ qrencode -lL -t ANSIutf8 < user1.conf
 ```
 
 The script will start assign IPs from ${mnet}.64/24 - in this example 10.0.0.64/24.
-it will create a file `last_ip`, which will contain last used client IP.
+It will create a file `last_ip`, which will contain last used client IP.
 
 ## Handle firewalld
 ```
