@@ -116,7 +116,7 @@ cat >> "${srv_conf}" <<EOF
 [Peer] # ${musr}
 PublicKey = ${client_pub}
 ${pre_line}
-AllowedIPs = ${addr}/24
+AllowedIPs = ${addr}
 EOF
 fi
 
