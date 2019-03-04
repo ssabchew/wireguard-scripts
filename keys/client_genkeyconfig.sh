@@ -16,16 +16,17 @@ srv_conf="../wg0-server.conf"
 # Client Network - to be added into cluster config.
 c_net="${mnet}.0/24"
 # Client EndPoint - to be added into cluster config.
-wg_srvip="1.1.1.1.:5128"
+wg_srvip="1.1.1.1:5128"
 
 function check_template(){
     # Too late for better solution...tiered now...go to sllep
     set +e
-    grep 'Endpoint = $\|PublicKey    = $' "${c_template}" &>/dev/null
+    grep 'Endpoint = $\|PublicKey    = $\|Endpoint = 1.1.1.1:5128$' "${c_template}" &>/dev/null
     ret=$?
     if [ "$ret" -eq 0 ] ;then
         echo "Client config not configured...exiting."
-        echo "Please fill-in server's: PublicKey and Endpoint"
+        echo "Please fill-in server's: PublicKey and Endpoint, do not use default 1.1.1.1:5128"
+        echo "Note: to change Endpoint, change the variable srv_conf in this file, and $c_template"
         exit 1
     fi
     set -e
@@ -57,6 +58,8 @@ function valid_ip(){
 }
 
 ### MAIN ###
+sed -i "s|@@@SRVEDNPOINT@@@|${wg_srvip}|" "${c_template}"
+
 check_srv_conf
 check_template
 # Init the IP File, if not present
@@ -107,7 +110,7 @@ fi
 sed -i "s|@@@client@|${musr}|" "${musr}".conf
 sed -i "s|@@@ADDR@@@|${addr}|" "${musr}".conf
 sed -i "s|@@@PRIVATEKEY@@@|${client_priv}|" "${musr}".conf
-sed -i "s| @@@PRESHARED@@@|${pre}|" "${musr}".conf
+sed -i "s|@@@PRESHARED@@@|${pre}|" "${musr}".conf
 
 
 if [ -n "${srv_conf}" ] ;then
